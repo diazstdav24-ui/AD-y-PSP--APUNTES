@@ -1,0 +1,201 @@
+{
+  "main": {
+    "id": "e832336f061e77a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "2bdcd13a52bf1fa0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5a42cb45e851aa17",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nueva pestaña"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c9ff5f3858e50145",
+    "type": "split",
+    "children": [
+      {
+        "id": "49a81bfd733864ca",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2230df2122078194",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "b4ccd43b80baee09",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "02827cb1a447bdc6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cf80e0b4f806892b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4435662fe6c39eea",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e66c83fd94af2507",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "c7cc45a01812af99",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "de03eb0988aa0e48",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "8ee20de5688b5f01",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "9db2a879dd15a338",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "5a42cb45e851aa17",
+  "lastOpenFiles": [
+    "AD-PSP UD1 - 02 HTTP.md",
+    "Sin título.md",
+    "AD-PSP UD1 - 05 Controladores y endpoints.md",
+    "AD-PSP UD1 - 04 Spring Boot e inyección de dependencias.md",
+    "AD-PSP UD1 - 03 REST.md",
+    "AD-PSP UD1 - 01 Aplicaciones distribuidas y servicios web.md",
+    "AD-PSP UD1 - 00 Índice.md",
+    "files/AD-PSP UD1 - 05 Controladores y endpoints.md",
+    "files/AD-PSP UD1 - 04 Spring Boot e inyección de dependencias.md",
+    "files/AD-PSP UD1 - 02 HTTP.md",
+    "files/AD-PSP UD1 - 01 Aplicaciones distribuidas y servicios web.md",
+    "files/AD-PSP UD1 - 00 Índice.md",
+    "files/AD-PSP UD1 - 03 REST.md",
+    "files"
+  ]
+}
