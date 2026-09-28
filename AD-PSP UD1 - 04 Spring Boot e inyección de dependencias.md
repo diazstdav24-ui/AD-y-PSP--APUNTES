@@ -7,11 +7,7 @@ creado: 2026-09-24
 
 # Spring Boot e inyección de dependencias
 
-> [!info] Nota
-> Tus apuntes no cubrían esta parte, así que gran parte es material de las diapositivas reorganizado, con lo que añado marcado como 🆕. Siguiendo tu regla, **no incluyo código**: describo los ejemplos de las diapositivas para que los escribas tú.
 
-> [!abstract] Leyenda
-> 🆕 añadido · 🧪 reto (respuesta plegada)
 
 Anterior: [[AD-PSP UD1 - 03 REST]] · Siguiente: [[AD-PSP UD1 - 05 Controladores y endpoints]] · Índice: [[AD-PSP UD1 - 00 Índice]]
 
@@ -21,32 +17,33 @@ Anterior: [[AD-PSP UD1 - 03 REST]] · Siguiente: [[AD-PSP UD1 - 05 Controladores
 
 - Un framework **opinionado** del ecosistema Spring.
 - **Simplifica** la creación de aplicaciones **listas para producción**.
-- Filosofía: **convención sobre configuración**.
+- Filosofía: **convención sobre configuración**. 
+	- Significa tomar el menor número de decisiones obvias, porqué lo obvio ya está **opinionado** 
 
-> [!note] 🆕 Qué significa "opinionado"
+> [!note]  Qué significa "opinionado"
 > Spring Boot ya viene con **decisiones tomadas por defecto**: qué versiones de las librerías son compatibles entre sí, qué servidor usar, cómo convertir objetos a JSON... Tú solo configuras lo que quieras cambiar. Es la idea de "convención sobre configuración": si sigues las convenciones, no escribes configuración.
 
-**Sin Spring Boot** (la diapositiva lo ilustra con un desarrollador desesperado) montar una aplicación Spring implicaba configurar todo a mano: ficheros XML, elegir a mano versiones compatibles de cada dependencia y desplegar en un servidor de aplicaciones externo. 🆕
+**Sin Spring Boot** (la diapositiva lo ilustra con un desarrollador desesperado) montar una aplicación Spring implicaba configurar todo a mano: ficheros XML, elegir a mano versiones compatibles de cada dependencia y desplegar en un servidor de aplicaciones externo. 
 
 ---
 
 ## 2. Características
 
-| Característica | Qué aporta |
-| --- | --- |
-| Aplicaciones **autónomas** | Se ejecutan por sí solas, sin desplegarlas en un servidor externo |
-| Servidor **incrustado** | El servidor web va dentro de la aplicación. 🆕 Por defecto, Tomcat |
-| Dependencias **predefinidas** | 🆕 Se traen con "starters": un paquete que arrastra todo lo necesario para un tipo de aplicación |
-| Configuración **automática** | Spring Boot detecta qué librerías tienes y configura lo típico |
-| Lista para **producción** | Trae herramientas de monitorización y arranque |
-| Sin generación de código ni **XML** | Se configura con anotaciones y ficheros de propiedades |
-| **Spring Initializr** | Generador de proyectos (ver abajo) |
+| Característica                      | Qué aporta                                                                                    |
+| ----------------------------------- | --------------------------------------------------------------------------------------------- |
+| Aplicaciones **autónomas**          | Se ejecutan por sí solas, sin desplegarlas en un servidor externo                             |
+| Servidor **incrustado**             | El servidor web va dentro de la aplicación. Por defecto, Tomcat                               |
+| Dependencias **predefinidas**       | Se traen con "starters": un paquete que arrastra todo lo necesario para un tipo de aplicación |
+| Configuración **automática**        | Spring Boot detecta qué librerías tienes y configura lo típico                                |
+| Lista para **producción**           | Trae herramientas de monitorización y arranque                                                |
+| Sin generación de código ni **XML** | Se configura con anotaciones y ficheros de propiedades                                        |
+| **Spring Initializr**               | Generador de proyectos (ver abajo)                                                            |
 
 **Tipos de aplicaciones que puedes crear**: cualquier aplicación Java (también Kotlin o Groovy): línea de comandos, web, **API REST**, microservicios...
 
 **Beneficios**: rapidez de desarrollo, menos código *boilerplate*, facilidad de despliegue y escalabilidad.
 
-### 🆕 Spring Initializr
+###  Spring Initializr
 Herramienta web (start.spring.io) que genera el esqueleto del proyecto. Vas eligiendo: gestor de construcción (Maven o Gradle), lenguaje, versión de Spring Boot, empaquetado, versión de Java y **dependencias**. Para una API REST, la dependencia básica es la de **Spring Web**.
 
 ---

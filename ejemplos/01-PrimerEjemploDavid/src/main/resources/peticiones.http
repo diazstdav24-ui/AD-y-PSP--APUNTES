@@ -1,0 +1,30 @@
+### GET request to example server
+
+
+     http://localhost:8080/api/hello?name=David
+
+###
+
+###  POST Crear un producto
+
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "Camiseta",
+  "price": 19.99
+}
+
+###
+
+GET http://localhost:8080/api/product
+
+###
+
+POST http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+  "name": "cerveza",
+  "price": 10.0
+}

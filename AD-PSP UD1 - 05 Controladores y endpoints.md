@@ -172,3 +172,16 @@ Cuando los tengas, me los pasas y los revisamos juntos.
 - [ ] Sé qué hace `ResponseEntity` y qué devuelve Spring si solo retorno un POJO.
 - [ ] Sé explicar la inyección de dependencias con el ejemplo del coche.
 - [ ] Sé probar todo con Postman, incluido un POST con JSON.
+
+idemPotencia: significa que ejecutar una operación una vwz o muchas veces seguidas deja el sistema en el mismo estado final. Repetirla no cmabia nada más depués de la primera vez 
+
+
+
+
+![[Pasted image 20260928104152.png]]![[Pasted image 20260928104049.png]]
+
+
+![[Pasted image 20260928103157.png]]
+
+![[Pasted image 20260928102601.png]]
+![[Pasted image 20260928103029.png]]

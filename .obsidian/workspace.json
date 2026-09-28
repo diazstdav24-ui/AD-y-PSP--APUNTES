@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2bdcd13a52bf1fa0",
+        "id": "3e2b0387727b5193",
         "type": "tabs",
         "children": [
           {
-            "id": "5a42cb45e851aa17",
+            "id": "b6471f027a425a37",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "AD-PSP UD1 - 05 Controladores y endpoints.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "AD-PSP UD1 - 05 Controladores y endpoints"
             }
           }
         ]
@@ -79,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "cf80e0b4f806892b",
@@ -181,13 +185,32 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "5a42cb45e851aa17",
+  "active": "b6471f027a425a37",
   "lastOpenFiles": [
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/ProductRepository.java~",
+    "ejemplos/01_PrimerEjemplo/pom.xml~",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/ProductController.java~",
+    "Pasted image 20260928104152.png",
+    "Pasted image 20260928104049.png",
+    "Pasted image 20260928103157.png",
+    "Pasted image 20260928103146.png",
+    "Pasted image 20260928103029.png",
+    "ejemplos/01_PrimerEjemplo/src/test/java/com/salesianos/dam/primerejemplo/ApplicationTests.java",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/ProductRepository.java",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/ProductController.java",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/Product.java",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/MyController.java",
+    "ejemplos/01_PrimerEjemplo/src/main/java/com/salesianos/dam/primerejemplo/Application.java",
+    "ejemplos/01_PrimerEjemplo/target/test-classes/com/salesianos/dam/primerejemplo/ApplicationTests.class",
+    "ejemplos/01_PrimerEjemplo/target/classes/com/salesianos/dam/primerejemplo/ProductRepository.class",
+    "ejemplos/01_PrimerEjemplo/HELP.md",
+    "Pasted image 20260928102601.png",
+    "AD-PSP UD1 - 04 Spring Boot e inyección de dependencias.md",
+    "AD-PSP UD1 - 05 Controladores y endpoints.md",
+    "2026-09-25.md",
+    "AD-PSP UD1 - 03 REST.md",
     "AD-PSP UD1 - 02 HTTP.md",
     "Sin título.md",
-    "AD-PSP UD1 - 05 Controladores y endpoints.md",
-    "AD-PSP UD1 - 04 Spring Boot e inyección de dependencias.md",
-    "AD-PSP UD1 - 03 REST.md",
     "AD-PSP UD1 - 01 Aplicaciones distribuidas y servicios web.md",
     "AD-PSP UD1 - 00 Índice.md",
     "files/AD-PSP UD1 - 05 Controladores y endpoints.md",
@@ -195,7 +218,6 @@
     "files/AD-PSP UD1 - 02 HTTP.md",
     "files/AD-PSP UD1 - 01 Aplicaciones distribuidas y servicios web.md",
     "files/AD-PSP UD1 - 00 Índice.md",
-    "files/AD-PSP UD1 - 03 REST.md",
-    "files"
+    "files/AD-PSP UD1 - 03 REST.md"
   ]
 }
