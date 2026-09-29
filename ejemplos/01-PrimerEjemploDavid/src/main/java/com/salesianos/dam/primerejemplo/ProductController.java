@@ -13,15 +13,15 @@ public class ProductController {
 
     private final ProductRepository productRepository;
 
-    List<Product> products = productRepository.getProducts();
 
 
 
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
 
+
         return ResponseEntity.status(201)
-                .body(productRepository.addProduct(product));
+                .body(productRepository.save(product));
 
         //ResponseEntity.badRequest().build, cod 400
     }
@@ -29,7 +29,9 @@ public class ProductController {
     @GetMapping
     ResponseEntity<List<Product>> getProducts(){
 
-        List<Product> result = productRepository.getProducts();
+
+
+        List<Product> result = productRepository.findAll();
 
         if (result.isEmpty()){
             //return ResponseEntity.status(404).build;
@@ -41,18 +43,36 @@ public class ProductController {
 
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable String name){
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductoById(@PathVariable Long id){
 
-        productRepository.deleteProducts(name);
+        return ResponseEntity.of(productRepository.findById(id));
 
-        return ResponseEntity.noContent().build();
     }
 
+    //Recordar siempre que @Pathvariable rescata cosas de la URL, y que @RequestBody obliga a que la petición lleve
+    // cuerpo
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable Long id,
+            @RequestBody Product product){
 
+        return productRepository.findById(id)
+                .map(p -> {
+                    p.setName(product.getName());
+                    p.setPrice(product.getPrice());
+                    return ResponseEntity.ok(productRepository.save(p));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
 
+        productRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
 
+    }
 
 }

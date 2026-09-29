@@ -28,3 +28,18 @@ Content-Type: application/json
   "name": "cerveza",
   "price": 10.0
 }
+
+###
+
+PUT http://localhost:8080/api/product/1
+Content-Type: application/json
+
+{
+  "name": "agua",
+  "price": 2.0
+
+}
+
+###
+
+DELETE http://localhost:8080/api/product/1
