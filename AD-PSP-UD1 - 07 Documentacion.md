@@ -1,5 +1,4 @@
 # Swagger / OpenAPI
-# Swagger / OpenAPI
 
 Swagger es un conjunto de herramientas para **diseñar, documentar y probar APIs REST**. El estándar que hay detrás se llama **OpenAPI**, y "Swagger" se usa como nombre de las herramientas que lo implementan.
 
@@ -56,16 +55,184 @@ Parte del comportamiento se puede cambiar desde el fichero de propiedades, sin t
 
 ## Anotaciones principales
 
-Todas pertenecen al paquete `io.swagger.v3.oas.annotations`.
+### 1. Nivel API
 
-| Anotación | Dónde se coloca | Qué hace |
-|---|---|---|
-| `@OpenAPIDefinition` | Una clase de configuración | Define la **información general de la API**: título, versión, descripción, datos de contacto y licencia. Se rellena con `@Info`, que a su vez contiene `@Contact` y `@License`. |
-| `@Tag` | Clase del controlador | Da **nombre y descripción** a un grupo de endpoints. Por ejemplo, name = "Product Controller" y una descripción de lo que gestiona. En Swagger UI aparece como sección agrupada. |
-| `@Operation` | Método del endpoint | Pone **título (`summary`) y descripción** a un endpoint concreto. |
-| `@ApiResponses` | Método del endpoint | Es el **contenedor**: espera dentro un array de `@ApiResponse`. No documenta nada por sí sola. |
-| `@ApiResponse` | Dentro de `@ApiResponses` | Documenta **una respuesta posible** del endpoint (ver detalle abajo). |
-| `@Schema` | Clase DTO o sus campos | Describe el modelo de datos: descripción de cada campo, ejemplos, si es obligatorio, etc. |
+| Anotación | Nivel | Descripción | Atributos clave |
+|---|---|---|---|
+| `@OpenAPIDefinition` | API | Punto de entrada de la documentación global. Se coloca en una clase de configuración. | `info`<br>`servers`<br>`tags`<br>`externalDocs` |
+| `@Info` | API | Metadatos generales de la API. | `title`<br>`version`<br>`description`<br>`contact`<br>`license` |
+| `@Contact` | API | Datos de contacto del responsable. | `name`<br>`email`<br>`url` |
+| `@License` | API | Licencia bajo la que se publica la API. | `name`<br>`url` |
+| `@Server` | API | Servidores donde está desplegada la API. | `url`<br>`description` |
+
+### Ejemplo
+
+```java
+@Configuration
+@OpenAPIDefinition(
+    info = @Info(
+        title = "API de Productos",
+        version = "1.0",
+        description = "API REST para la gestión del catálogo de productos",
+        contact = @Contact(name = "Davi", email = "davi@ejemplo.com"),
+        license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0")
+    ),
+    servers = @Server(url = "http://localhost:8080", description = "Servidor local")
+)
+public class OpenApiConfig {
+}
+```
+
+> **Resultado en Swagger UI:** el título, la versión y la descripción aparecen en la cabecera de la página, y el servidor en el desplegable *Servers*.
+
+### 2.Nivel Controlador: 
+
+| Anotación | Nivel | Descripción | Atributos clave |
+|---|---|---|---|
+| `@Tag` | Controlador | 	Agrupa los endpoints bajo una sección en Swagger UI | `name`<br>`description`|
+| `@ApiResponses` | Controlador | Si la pones en la clase, aplica a todos los endpoints. Sirve para errores comunes como un 500. | `@value`|
+| `@Hidden` | Controlador o endpoint |Oculta algo de la documentación | sin atributos |
+### Ejemplo
+
+```java
+@RestController
+@RequestMapping("/products")
+@Tag(name = "Product Controller", description = "Operaciones para la gestión del catálogo de productos")
+public class ProductController {
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    // Endpoints (ver nivel 3)
+}
+```
+
+> **Resultado en Swagger UI:** todos los endpoints de esta clase aparecen agrupados en una sección desplegable llamada *Product Controller*, con su descripción.
+
+---
+
+## 3. Nivel endpoint
+
+| Anotación | Nivel | Descripción | Atributos clave |
+|---|---|---|---|
+| `@Operation` | Endpoint | Título y descripción de la operación. | `summary`<br>`description`<br>`tags`<br>`deprecated` |
+| `@ApiResponses` | Endpoint | Contenedor que agrupa las posibles respuestas. | `value` |
+| `@ApiResponse` | Endpoint | Una respuesta HTTP posible del endpoint. | `responseCode`<br>`description`<br>`content` |
+| `@Content` | Dentro de `@ApiResponse` | Tipo de contenido y qué viaja en el cuerpo. | `mediaType`<br>`schema`<br>`examples` |
+| `@ExampleObject` | Dentro de `@Content` | Ejemplo literal del JSON. | `name`<br>`summary`<br>`value` |
+| `@Parameter` | Parámetro del método | Documenta un `@PathVariable` o `@RequestParam`. | `name`<br>`description`<br>`required`<br>`example` |
+| `@RequestBody` (Swagger) | Parámetro del método | Documenta el cuerpo de la petición en un POST o PUT. | `description`<br>`required`<br>`content` |
+
+### Ejemplo
+
+```java
+@Operation(
+    summary = "Obtener un producto por su ID",
+    description = "Devuelve los datos de un producto concreto del catálogo"
+)
+@ApiResponses(value = {
+    @ApiResponse(
+        responseCode = "200",
+        description = "Producto encontrado",
+        content = @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = ProductDTO.class),
+            examples = @ExampleObject(
+                name = "Producto de ejemplo",
+                value = """
+                    {
+                      "id": 1,
+                      "name": "Teclado mecánico",
+                      "price": 59.99,
+                      "category": "PERIFERICOS",
+                      "tags": ["gaming", "rgb"]
+                    }
+                    """
+            )
+        )
+    ),
+    @ApiResponse(responseCode = "404", description = "No existe ningún producto con ese ID")
+})
+@GetMapping("/{id}")
+public ResponseEntity<ProductDTO> findById(
+        @Parameter(description = "ID del producto a buscar", required = true, example = "1")
+        @PathVariable Long id) {
+    return ResponseEntity.ok(productService.findById(id));
+}
+
+@Operation(summary = "Crear un producto nuevo")
+@ApiResponses(value = {
+    @ApiResponse(
+        responseCode = "201",
+        description = "Producto creado correctamente",
+        content = @Content(mediaType = "application/json",
+                           schema = @Schema(implementation = ProductDTO.class))
+    ),
+    @ApiResponse(responseCode = "400", description = "Los datos enviados no son válidos")
+})
+@PostMapping
+public ResponseEntity<ProductDTO> create(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Datos del producto a crear",
+            required = true
+        )
+        @RequestBody ProductDTO dto) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(dto));
+}
+```
+
+> **Resultado en Swagger UI:** cada endpoint muestra su título, el parámetro `id` con su ejemplo ya relleno, y la lista de respuestas (200/404 y 201/400) con el JSON de ejemplo y el modelo del DTO.
+
+---
+
+## 4. Nivel DTO
+
+| Anotación | Nivel | Descripción | Atributos clave |
+|---|---|---|---|
+| `@Schema` (clase) | DTO | Describe el modelo de datos completo. | `name`<br>`description` |
+| `@Schema` (campo) | Atributo | Describe un campo concreto del DTO. | `description`<br>`example`<br>`requiredMode`<br>`accessMode`<br>`minLength` / `maxLength`<br>`minimum` / `maximum`<br>`allowableValues` |
+| `@ArraySchema` | Atributo | Describe un campo que es una lista. | `schema`<br>`arraySchema`<br>`minItems` / `maxItems` |
+
+### Ejemplo
+
+```java
+@Schema(description = "Representa un producto del catálogo")
+public record ProductDTO(
+
+    @Schema(description = "Identificador único del producto",
+            example = "1",
+            accessMode = Schema.AccessMode.READ_ONLY)
+    Long id,
+
+    @Schema(description = "Nombre comercial del producto",
+            example = "Teclado mecánico",
+            requiredMode = Schema.RequiredMode.REQUIRED,
+            minLength = 3, maxLength = 100)
+    String name,
+
+    @Schema(description = "Precio en euros",
+            example = "59.99",
+            requiredMode = Schema.RequiredMode.REQUIRED,
+            minimum = "0")
+    BigDecimal price,
+
+    @Schema(description = "Categoría del producto",
+            example = "PERIFERICOS",
+            allowableValues = {"PERIFERICOS", "COMPONENTES", "ALMACENAMIENTO"})
+    String category,
+
+    @ArraySchema(
+        arraySchema = @Schema(description = "Etiquetas asociadas al producto"),
+        schema = @Schema(example = "gaming"),
+        minItems = 0)
+    List<String> tags
+) {}
+```
+
+> **Resultado en Swagger UI:** en la sección *Schemas* aparece el modelo con cada campo descrito, los obligatorios marcados con asterisco y los valores permitidos de `category`. El `id` sale en las respuestas pero no se pide en el POST.
 
 ### Qué hace `@ApiResponse`
 
