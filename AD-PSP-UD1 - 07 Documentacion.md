@@ -57,13 +57,13 @@ Parte del comportamiento se puede cambiar desde el fichero de propiedades, sin t
 
 ### 1. Nivel API
 
-| Anotación | Nivel | Descripción | Atributos clave |
-|---|---|---|---|
-| `@OpenAPIDefinition` | API | Punto de entrada de la documentación global. Se coloca en una clase de configuración. | `info`<br>`servers`<br>`tags`<br>`externalDocs` |
-| `@Info` | API | Metadatos generales de la API. | `title`<br>`version`<br>`description`<br>`contact`<br>`license` |
-| `@Contact` | API | Datos de contacto del responsable. | `name`<br>`email`<br>`url` |
-| `@License` | API | Licencia bajo la que se publica la API. | `name`<br>`url` |
-| `@Server` | API | Servidores donde está desplegada la API. | `url`<br>`description` |
+| Anotación            | Nivel | Descripción                                                                           | Atributos clave                                                 |
+| -------------------- | ----- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `@OpenAPIDefinition` | API   | Punto de entrada de la documentación global. Se coloca en una clase de configuración. | `info`<br>`servers`<br>`tags`<br>`externalDocs`                 |
+| `@Info`              | API   | Metadatos generales de la API.                                                        | `title`<br>`version`<br>`description`<br>`contact`<br>`license` |
+| `@Contact`           | API   | Datos de contacto del responsable.                                                    | `name`<br>`email`<br>`url`                                      |
+| `@License`           | API   | Licencia bajo la que se publica la API.                                               | `name`<br>`url`                                                 |
+| `@Server`            | API   | Servidores donde está desplegada la API.                                              | `url`<br>`description`                                          |
 
 ### Ejemplo
 
@@ -116,15 +116,15 @@ public class ProductController {
 
 ## 3. Nivel endpoint
 
-| Anotación | Nivel | Descripción | Atributos clave |
-|---|---|---|---|
-| `@Operation` | Endpoint | Título y descripción de la operación. | `summary`<br>`description`<br>`tags`<br>`deprecated` |
-| `@ApiResponses` | Endpoint | Contenedor que agrupa las posibles respuestas. | `value` |
-| `@ApiResponse` | Endpoint | Una respuesta HTTP posible del endpoint. | `responseCode`<br>`description`<br>`content` |
-| `@Content` | Dentro de `@ApiResponse` | Tipo de contenido y qué viaja en el cuerpo. | `mediaType`<br>`schema`<br>`examples` |
-| `@ExampleObject` | Dentro de `@Content` | Ejemplo literal del JSON. | `name`<br>`summary`<br>`value` |
-| `@Parameter` | Parámetro del método | Documenta un `@PathVariable` o `@RequestParam`. | `name`<br>`description`<br>`required`<br>`example` |
-| `@RequestBody` (Swagger) | Parámetro del método | Documenta el cuerpo de la petición en un POST o PUT. | `description`<br>`required`<br>`content` |
+| Anotación                | Nivel                    | Descripción                                          | Atributos clave                                      |
+| ------------------------ | ------------------------ | ---------------------------------------------------- | ---------------------------------------------------- |
+| `@Operation`             | Endpoint                 | Título y descripción de la operación.                | `summary`<br>`description`<br>`tags`<br>`deprecated` |
+| `@ApiResponses`          | Endpoint                 | Contenedor que agrupa las posibles respuestas.       | `value`                                              |
+| `@ApiResponse`           | Endpoint                 | Una respuesta HTTP posible del endpoint.             | `responseCode`<br>`description`<br>`content`         |
+| `@Content`               | Dentro de `@ApiResponse` | Tipo de contenido y qué viaja en el cuerpo.          | `mediaType`<br>`schema`<br>`examples`                |
+| `@ExampleObject`         | Dentro de `@Content`     | Ejemplo literal del JSON.                            | `name`<br>`summary`<br>`value`                       |
+| `@Parameter`             | Parámetro del método     | Documenta un `@PathVariable` o `@RequestParam`.      | `name`<br>`description`<br>`required`<br>`example`   |
+| `@RequestBody` (Swagger) | Parámetro del método     | Documenta el cuerpo de la petición en un POST o PUT. | `description`<br>`required`<br>`content`             |
 
 ### Ejemplo
 
