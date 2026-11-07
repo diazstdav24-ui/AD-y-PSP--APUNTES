@@ -75,7 +75,7 @@ Da igual que la bdd sea relacional o no relacional
 
 En este momento aprece la herencia multiple. Aqui hereada tanto de listPagingRepository como de CrudRepository
 
-**JAVA si permite que una interfaz here de varías interfaces** pero con clase no. 
+**JAVA si permite que una interfaz herede de varías interfaces** pero con clase no. 
 
 Los JPA necestia que le digamos dos tipos de datos. EL tipo y el tipo del id. 
 
