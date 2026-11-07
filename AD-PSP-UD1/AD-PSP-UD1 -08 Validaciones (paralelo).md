@@ -37,12 +37,12 @@ Ahora: la dependencia trae la API estándar de Jakarta Validation (las anotacion
 
 ![alt text](image-2.png)
 
-| Anotación | Qué comprueba |
-|---|---|
-| `@NotNull` | El campo no puede ser nulo. Ojo: una cadena vacía `""` sí pasa. |
-| `@NotEmpty` | No puede ser nulo ni estar vacío (cadenas, colecciones, mapas, arrays). Una cadena de solo espacios sí pasa. |
-| `@NotBlank` | Solo para cadenas: no nulo y con al menos un carácter que no sea espacio. |
-| `@Min`, `@Max` | El valor numérico no puede ser menor que el mínimo / mayor que el máximo. |
+| Anotación      | Qué comprueba                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `@NotNull`     | El campo no puede ser nulo. Ojo: una cadena vacía `""` sí pasa.                                              |
+| `@NotEmpty`    | No puede ser nulo ni estar vacío (cadenas, colecciones, mapas, arrays). Una cadena de solo espacios sí pasa. |
+| `@NotBlank`    | Solo para cadenas: no nulo y con al menos un carácter que no sea espacio.                                    |
+| `@Min`, `@Max` | El valor numérico no puede ser menor que el mínimo / mayor que el máximo.                                    |
 
 ✏️ La diapositiva dice "por debajo/encima" en el orden `@Min`, `@Max`, y está al revés: `@Min` exige estar **por encima o igual** al valor, y `@Max` **por debajo o igual**.
 
@@ -131,7 +131,7 @@ Los mensajes pueden estar en tres sitios:
 
 ➕ Las tres piezas, para no confundirlas:
 
-- **`ConstraintViolation`** (sin "Exception"): *un* fallo concreto, con campo, valor, regla incumplida y mensaje.
+- **`ConstraintViolation`** (sin "Exception"): _un_ fallo concreto, con campo, valor, regla incumplida y mensaje.
 - **El conjunto de violaciones**: lo que devuelve el validador si lo usas a mano. Vacío = todo correcto, y no salta ninguna excepción.
 - **`ConstraintViolationException`**: la excepción que envuelve ese conjunto cuando el framework corta la ejecución (parámetros simples con `@Validated` en la clase, o al guardar una entidad con JPA).
 
@@ -147,3 +147,51 @@ Falta la conversión de `ConstraintViolation` a `ApiValidationSubError`. Pistas,
 2. Piensa qué ruta ves cuando el fallo es de un parámetro de método: no es lo mismo que la de un campo de un DTO, y puede que tengas que quedarte solo con la última parte.
 3. Decide qué rellenas en `object` y qué en `field` en este caso, y comprueba con una petición con duplicados que la respuesta sale con el mismo formato que la de `price`.
 4. Añade un `@ExceptionHandler` para `ConstraintViolationException` que recorra todas las violaciones y devuelva la lista.
+
+# DIA 19/10
+
+## Crear una anotación
+
+Nombre de producto que no se puede repetir usamos @interface
+
+![alt text](image-11.png)
+
+Se puede hacer que una validacion tenga comportamientos diferentes según su grupo.
+La que más vamos a usar es msj
+
+### Crear la anotación
+
+![alt text](image-12.png)
+
+`@Target` indica donde la vamos a poder utilizar. Tanto a nivel de metodo como de campo
+`@Retention` sirve para explicar todo el flujo del codigo cuando la anotación tiene actividad.
+
+`@Constraint` le inidcamos la clase que tiene que valicar
+
+El validador ofrece dos metodos, uno de validacion y otro que isValid, que devuelve True si el valor que validamos es validos y además le pasamos el contexto, se usa en ocasiones con librería de terceros.
+
+![alt text](image-13.png)
+En product repository creamos una consulta para saber si existe por nombre
+
+ºno mires la siguiente imagen:
+![alt text](image-14.png)
+Usamos el hastext para que cortocircuite antes de hacer la consulta
+
+fichero de properties
+
+![alt text](image-15.png)
+
+## Validaciones a la vez de más de un campo de un objeto
+
+La anotación ya no se puede poner en más de un campos, si no que tenemos que ponerla a nivel de clase y trabajar con ella.
+
+![alt text](image-16.png)
+
+En lugar de darle el valor de lcampo passw y verify passw, que no se lo podemos dar en tiempo de ejecución, le damos el nombre del campo de la contraseña y el nombre de verifypassw.
+El target se utilza a nivel de toda la clase, no de atr.
+
+1. Un DTO en el body (@Valid @RequestBody)
+   Lo valida Spring MVC al convertir el JSON y lanza MethodArgumentNotValidException. Dentro trae FieldError u ObjectError, así que este caso va por from(ObjectError). Aquí cae la gran mayoría de tu proyecto, incluida tu validación de clase.
+
+2. Parámetros sueltos de un método (un @PathVariable, un @RequestParam, o un método de servicio con @Validated)
+   Aquí no hay BindingResult. Bean Validation da directamente objetos ConstraintViolation, así que este caso va por from(ConstraintViolation). En el controller, desde Boot 3.2, puede llegarte como HandlerMethodValidationException.
